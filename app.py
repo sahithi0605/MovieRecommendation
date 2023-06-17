@@ -3,6 +3,7 @@ import pickle
 import streamlit as st
 import requests
 import time
+import pandas as pd
 
 # set page configurations
 st.set_page_config(
@@ -40,9 +41,9 @@ def recommend(movie):
 st.markdown("<h1 style='text-align: center; color: white;'> MovieZone</h1>", unsafe_allow_html=True)
 #st.title('MovieZone')
 st.markdown("<h2 style='text-align: left; color: brown;'>Movie Recommendation System</h2>", unsafe_allow_html=True)
-movies = pickle.load(open('movie_list.pkl','rb'))
-similarity = pickle.load(open('similarity.pkl','rb'))
-crews = pickle.load(open('cast.pkl','rb'))
+movies = pd.read_pickle(open('movie_list.pkl','rb'))
+similarity = pd.read_pickle(open('similarity.pkl','rb'))
+crews = pd.read_pickle(open('cast.pkl','rb'))
 
 movie_list = movies['title'].values
 selected_movie = st.selectbox(
