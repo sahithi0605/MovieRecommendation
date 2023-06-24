@@ -15,8 +15,9 @@ st.set_page_config(
  )
 
 # fetch poster from api using movie_id and api key 
+api_key = st.text_input('Enter your API key')
 def fetch_poster(movie_id):
-    url = "https://api.themoviedb.org/3/movie/{}?api_key={}".format(movie_id, API_KEY)
+    url = "https://api.themoviedb.org/3/movie/{}?api_key={}".format(movie_id, api_key)
     data = requests.get(url)
     data = data.json()
     poster_path = data['poster_path']
