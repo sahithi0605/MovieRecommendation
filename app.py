@@ -4,8 +4,8 @@ import streamlit as st
 import requests
 import pandas as pd
 import time
-import requests
 from config import API_KEY
+
 
 # set page configurations
 st.set_page_config(
