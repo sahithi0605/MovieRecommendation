@@ -4,7 +4,6 @@ import streamlit as st
 import requests
 import pandas as pd
 import time
-from config import API_KEY
 
 
 # set page configurations
