@@ -1,9 +1,11 @@
 # importing the libraries
-import pickle
+import  pickle
 import streamlit as st
 import requests
-import time
 import pandas as pd
+import time
+from config import API_KEY
+
 
 # set page configurations
 st.set_page_config(
@@ -14,7 +16,7 @@ st.set_page_config(
 
 # fetch poster from api using movie_id and api key 
 def fetch_poster(movie_id):
-    url = "https://api.themoviedb.org/3/movie/{}?api_key=a70cc3ea856f2db01379a6eef22257d8".format(movie_id)
+    url = "https://api.themoviedb.org/3/movie/{}?api_key={}".format(movie_id, API_KEY)
     data = requests.get(url)
     data = data.json()
     poster_path = data['poster_path']
@@ -22,7 +24,8 @@ def fetch_poster(movie_id):
         full_path = "https://image.tmdb.org/t/p/original" + poster_path
     else:
         full_path = "https://image.tmdb.org/t/p/original"    
-    return full_path   
+    return full_path
+
 
 # function for recommendation
 def recommend(movie):
