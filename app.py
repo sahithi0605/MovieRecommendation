@@ -1,8 +1,11 @@
 # importing the libraries
-import pickle
+import  pickle
 import streamlit as st
 import requests
+import pandas as pd
 import time
+import requests
+from config import API_KEY
 
 # set page configurations
 st.set_page_config(
@@ -13,7 +16,7 @@ st.set_page_config(
 
 # fetch poster from api using movie_id and api key 
 def fetch_poster(movie_id):
-    url = "https://api.themoviedb.org/3/movie/{}?api_key=a70cc3ea856f2db01379a6eef22257d8".format(movie_id)
+    url = "https://api.themoviedb.org/3/movie/{}?api_key={}".format(movie_id, API_KEY)
     data = requests.get(url)
     data = data.json()
     poster_path = data['poster_path']
@@ -21,7 +24,8 @@ def fetch_poster(movie_id):
         full_path = "https://image.tmdb.org/t/p/original" + poster_path
     else:
         full_path = "https://image.tmdb.org/t/p/original"    
-    return full_path   
+    return full_path
+
 
 # function for recommendation
 def recommend(movie):
@@ -40,9 +44,9 @@ def recommend(movie):
 st.markdown("<h1 style='text-align: center; color: white;'> MovieZone</h1>", unsafe_allow_html=True)
 #st.title('MovieZone')
 st.markdown("<h2 style='text-align: left; color: brown;'>Movie Recommendation System</h2>", unsafe_allow_html=True)
-movies = pickle.load(open('movie_list.pkl','rb'))
-similarity = pickle.load(open('similarity.pkl','rb'))
-crews = pickle.load(open('cast.pkl','rb'))
+movies = pd.read_pickle(open('movie_list.pkl','rb'))
+similarity = pd.read_pickle(open('similarity.pkl','rb'))
+crews = pd.read_pickle(open('cast.pkl','rb'))
 
 movie_list = movies['title'].values
 selected_movie = st.selectbox(
